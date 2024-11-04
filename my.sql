@@ -1,0 +1,2 @@
+-- Active: 1730383304382@@127.0.0.1@3306@seqtest
+CREATE DATABASE seqtest 
