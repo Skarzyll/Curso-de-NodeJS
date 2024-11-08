@@ -5,7 +5,13 @@ const { engine } = require('express-handlebars')
 const Post = require('./post')
 
 //config
-app.engine('handlebars', engine({defaultLayout: 'main'}))
+app.engine('handlebars', engine({
+    defaultLayout: 'main',
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true,
+    }
+}))
 app.set('view engine', 'handlebars')
 
 //body parser
@@ -20,8 +26,9 @@ app.get('/' , (req , res)=>{
 })
 
 app.get('/posts' , (req , res)=>{
-
-    res.render('posts')
+    Post.findAll().then(posts => {
+        res.render('posts', {posts: posts})
+    })
 
 })
 
